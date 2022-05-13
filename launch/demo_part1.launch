@@ -1,0 +1,18 @@
+<launch>
+    <node pkg= "beta_vonns_and_frames" type="frame_broadcaster_node_tf2.py" name= "transform_broadcaster_tf2"/>
+
+    <node pkg= "beta_vonns_and_frames" type="pointclouds2_transform_node_tf2.py" name= "pointcloud_transform_listener_tf2"/>
+    
+    <include file= "$(find beta_vonns_and_frames)/launch/laserscan_rplidar.launch"/>
+    <node pkg= "beta_vonns_and_frames" type="laserscan_client_node.py" name= "laser_assembler_client"/>
+
+    <!--
+        rosrun point_cloud_converter point_cloud_converter_node points2_in:=/my_pointclouds2 points_out:=/my_pointclouds1
+    <node pkg= "point_cloud_converter" type= "point_cloud_converter_node" name= "point_cloud_converter_node">
+        <param name= "points2_in" value= "/my_pointclouds2"/>
+        <param name= "points_out" value= "/my_pointclouds1"/>
+    </node>
+    -->
+
+    <node pkg= "beta_vonns_and_frames" type="pointclouds1_subscriber_node.py" name= "pointclouds1_subscriber"/>
+</launch>

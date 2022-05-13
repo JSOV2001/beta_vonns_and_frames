@@ -1,0 +1,16 @@
+<launch>
+    <!--
+        rosrun point_cloud_converter point_cloud_converter_node points2_in:=/my_pointclouds2 points_out:=/my_pointclouds1
+    <node pkg= "point_cloud_converter" type= "point_cloud_converter_node" name= "point_cloud_converter_node">
+        <param name= "points2_in" value= "/my_pointclouds2"/>
+        <param name= "points_out" value= "/my_pointclouds1"/>
+    </node>
+    -->
+
+    <node pkg= "beta_vonns_and_frames" type="pointclouds1_subscriber_node.py" name= "pointclouds1_subscriber"/>
+
+    <include file="$(find beta_vonns_and_frames)/launch/pointclouds1_rplidar.launch"/>
+    <node pkg= "beta_vonns_and_frames" type= "pointclouds1_client_node.py" name= "pointclouds1_client"/>
+
+    <node pkg= "rviz" type="rviz" name="rviz"/>
+</launch>
